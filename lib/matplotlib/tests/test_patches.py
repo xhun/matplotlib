@@ -410,3 +410,15 @@ def test_contains_points():
     expected = path.contains_points(points, transform, radius)
     result = ell.contains_points(points)
     assert np.all(result == expected)
+
+
+def test_update_from():
+    # test that update_from properly sets the facecolor.
+    fig, ax = plt.subplots()
+    rect = Rectangle((0, 0), 1., 1., facecolor='magenta')
+    rect2 = Rectangle((1., 0), 1., 1., facecolor='blue')
+    ax.add_patch(rect)
+    ax.add_patch(rect2)
+    rect2.update_from(rect)
+    rect2.set_alpha(0.8)
+    assert rect2.get_facecolor() == (1., 0., 1., 0.8)
